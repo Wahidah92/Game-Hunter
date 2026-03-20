@@ -1,0 +1,108 @@
+Cipta satu permainan sebutan berasaskan pelayar (browser-based pronunciation game) untuk murid sekolah rendah.
+Permainan ini mesti serasi dengan komputer, telefon Android dan iPhone.
+KONSEP PERMAINAN
+Permainan ini diinspirasikan daripada permainan halangan gaya TikTok. Sebuah kereta animasi kecil bergerak melalui bandar kartun berwarna-warni dari kiri ke kanan.
+Apabila kereta sampai ke halangan, satu ayat akan dipaparkan. Pemain perlu menyebut ayat tersebut menggunakan mikrofon.
+Jika sebutan betul:
+
+kereta melepasi halangan
+pemain mendapat +10 markah
+butang "Tahap Seterusnya" muncul
+Jika sebutan salah:
+
+kereta terlanggar halangan
+pemain boleh cuba semula
+TOPIK
+Tempat di Bandar (ayat mudah menggunakan kata adjektif).
+SENARAI AYAT
+Simpan ayat berikut dalam array:
+Taman ini besar dan hijau.
+Perpustakaan itu sunyi dan bersih.
+Pasar itu sibuk dan bising.
+Pusat membeli-belah itu besar dan terang.
+Muzium itu lama tetapi menarik.
+Hospital itu besar dan moden.
+Pawagam itu gelap tetapi selesa.
+Taman permainan itu berwarna-warni.
+Stesen kereta api itu sibuk.
+Bandar ini cantik dan bersih.
+STRUKTUR PERMAINAN
+
+Gunakan pemboleh ubah currentLevel untuk menjejak tahap.
+Paparkan indikator tahap (contoh: Tahap 1 / 10).
+Jangan bergerak ke tahap seterusnya secara automatik.
+Selepas jawapan betul, paparkan butang "Tahap Seterusnya".
+Permainan tamat selepas semua ayat selesai.
+SISTEM MARKAH
+
+Markah bermula dengan 0.
+Setiap jawapan betul mendapat +10 markah.
+Paparkan markah sepanjang permainan.
+Benarkan percubaan semula tanpa had.
+PAPARAN VISUAL
+
+Latar belakang bandar kartun
+Kereta animasi kecil bergerak dari kiri ke kanan
+Kereta mesti menghadap ke kanan
+Halangan muncul sebelum setiap ayat
+Ikon kecil bagi setiap tempat dipaparkan bersama ayat
+PENGECAMAN SUARA (SANGAT PENTING)
+Kod mesti menyokong Android dan iOS.
+Gunakan pengesanan API berikut:
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+Jika API tidak wujud, paparkan mesej:
+"Pelayar ini tidak menyokong pengecaman suara. Sila gunakan Google Chrome."
+Inisialisasi recognition seperti berikut:
+const recognition = new SpeechRecognition();
+recognition.lang = "ms-MY";
+recognition.continuous = false;
+recognition.interimResults = false;
+Pastikan speech recognition hanya bermula selepas pemain menekan butang mikrofon.
+Contoh:
+micButton.addEventListener("click", () => {
+recognition.start();
+});
+Jangan memulakan recognition secara automatik semasa halaman dimuatkan.
+AKSES MIKROFON
+Sebelum menggunakan speech recognition, minta akses mikrofon menggunakan:
+navigator.mediaDevices.getUserMedia({ audio: true })
+Jika akses ditolak, paparkan mesej:
+"Sila benarkan akses mikrofon untuk bermain permainan ini."
+PENGENDALIAN RALAT
+Tambahkan pengendalian ralat berikut supaya permainan tidak gagal pada telefon:
+recognition.onerror = function(event) {
+console.error(event.error);
+}
+Jika tiada suara dikesan:
+paparkan mesej "Tiada suara dikesan. Sila cuba lagi."
+TOLERANSI SEBUTAN
+Jangan memerlukan padanan ayat 100% tepat.
+Bandingkan ayat yang disebut dengan ayat sasaran dan terima jawapan jika persamaan sekitar 75% hingga 90%.
+REKA BENTUK MIKROFON
+Gunakan sistem Push-To-Talk:
+
+Pemain menekan butang mikrofon
+Sistem mula mendengar
+Pemain menyebut ayat
+Sistem berhenti mendengar selepas ayat selesai
+MESRA TELEFON
+Permainan mesti:
+
+responsif
+mempunyai butang mikrofon yang besar
+mudah ditekan pada skrin telefon
+KESAN BUNYI
+
+Bunyi kejayaan apabila kereta melepasi halangan
+Bunyi pelanggaran apabila jawapan salah
+KEPERLUAN TEKNIKAL
+Hasilkan semuanya dalam SATU fail HTML lengkap menggunakan:
+HTML
+CSS
+JavaScript
+Permainan mesti berjalan terus dalam pelayar.
+Pastikan kod serasi dengan:
+Google Chrome (Android)
+Microsoft Edge
+Safari (iPhone)
+Jangan gunakan pustaka luar yang memerlukan pemasangan tambahan.
